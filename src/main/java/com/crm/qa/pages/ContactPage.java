@@ -1,5 +1,5 @@
 package com.crm.qa.pages;
 
-public class MyServicePage {
+public class ContactPage {
 
 }

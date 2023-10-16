@@ -8,18 +8,21 @@ import org.openqa.selenium.support.PageFactory;
 import com.crm.qa.base.TestBase;
 
 public class HomePage extends TestBase {
+	
+	@FindBy(xpath="//a[@data-test-id='home-link']")
+	WebElement homPageDisplay;
 
-	@FindBy(xpath = "//li[@menuitemname='Services']")
-	WebElement servicesOptionLink;
+	@FindBy(xpath = "//a[@role='menuitem' and contains(text(),'Service')]")
+	WebElement serviceOptionLink;
 
-	@FindBy(xpath = "//ul[@class='dropdown-menu show']/li[@menuitemname='My Services']")
-	WebElement myServicesOptionLink;
+	@FindBy(xpath = "//a[@role='menuitem' and contains(text(),'Contact')]")
+	WebElement contactOptionLink;
 
+	@FindBy(xpath = "//a[@role='menuitem']//div[contains(text(),'Contacts')]")
+	WebElement clickContactOption;
+	
 	@FindBy(xpath = "//li[@menuitemname='Support']")
 	WebElement supportOptionLink;
-
-	@FindBy(xpath = "//h2[text()='Account Services']")
-	WebElement AccountServicePage;
 
 	public HomePage() {
 		PageFactory.initElements(driver, this);
@@ -28,19 +31,23 @@ public class HomePage extends TestBase {
 	public String toVerifyTitle() {
 		return driver.getTitle();
 	}
-
-	public boolean toVerifyLoggedInUser() {
-		return AccountServicePage.isDisplayed();
+	
+	public boolean isHomePageDisplayed() {
+		return homPageDisplay.isDisplayed();
 	}
-
-	public MyServicePage clickOnServiceLink() throws InterruptedException {
+	
+	public boolean isServiceLinkDisplayed() {
+		return serviceOptionLink.isDisplayed();
+	}
+	
+	public ContactPage clickOnContactOption() throws InterruptedException {
 		Actions ac = new Actions(driver);
-		ac.click(servicesOptionLink).build().perform();
-		Thread.sleep(5);
+		ac.clickAndHold(contactOptionLink).build().perform();
+		clickContactOption.click();
 		// ac.moveToElement(myServicesOptionLink).click().perform();
 		// servicesOptionLink.click();
-		myServicesOptionLink.click();
-		return new MyServicePage();
+		//myServicesOptionLink.click();
+		return new ContactPage();
 
 	}
 

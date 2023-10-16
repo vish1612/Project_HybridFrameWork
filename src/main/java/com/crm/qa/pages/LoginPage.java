@@ -9,23 +9,20 @@ import com.crm.qa.base.TestBase;
 public class LoginPage extends TestBase {
 
 	// Page Factory - OR(Object Repository)
-	@FindBy(name = "username")
+	@FindBy(id = "username")
 	WebElement username;
 
-	@FindBy(name = "password")
+	@FindBy(id = "password")
 	WebElement password;
 
-	@FindBy(xpath = "//input[@type='submit']")
+	@FindBy(id = "loginBtn")
 	WebElement loginBtn;
 
-	@FindBy(linkText = "Register")
-	WebElement signUpLink;
+	@FindBy(xpath = "//i18n-string[text()='Sign up']")
+	WebElement registerOption;
 
-	@FindBy(xpath = "//img[@title='ParaBank']")
-	WebElement companyLogo;
-
-	@FindBy(xpath = "//div[@id='loginPanel']")
-	WebElement loginPageLogo;
+	@FindBy(id = "hs-login")
+	WebElement loginPageOption;
 
 	// To Initialize the PageFactory using initElements - Initializing Page Objects
 	public LoginPage() {
@@ -38,8 +35,12 @@ public class LoginPage extends TestBase {
 		return driver.getTitle();
 	}
 
-	public boolean validateIsLoginPageDisplayed() {
-		return loginPageLogo.isDisplayed();
+	public boolean validateIsSignUpOptionDisplayed() {
+		return registerOption.isDisplayed();
+	}
+
+	public boolean validateIsLoginOptionDisplayed() {
+		return loginPageOption.isDisplayed();
 	}
 
 	public HomePage login(String un, String pwd) {

@@ -9,18 +9,17 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.crm.qa.base.TestBase;
+import com.crm.qa.pages.ContactPage;
 import com.crm.qa.pages.HomePage;
 import com.crm.qa.pages.LoginPage;
-import com.crm.qa.pages.MyServicePage;
 import com.crm.qa.util.TestUtil;
 
 public class HomePageTest extends TestBase {
 
 	LoginPage loginpage;
 	HomePage homepage;
-	MyServicePage servicepage;
+	ContactPage contactpage;
 
-	String sheetName = "contacts";
 	
 	public HomePageTest() {
 		super();
@@ -41,15 +40,11 @@ public class HomePageTest extends TestBase {
 	 * @Test(priority = 2) public void toVerifyUserIsDisplayed() {
 	 * assertTrue(homepage.toVerifyLoggedInUser()); }
 	 */
-	@DataProvider
-	public Object[][] getCRMTestData() {
-		Object data[][] = TestUtil.getTestData(sheetName);
-		return data;
-	}
+	
 
-	@Test(priority = 3)
-	public void clickOnMyService() throws InterruptedException {
-		servicepage = homepage.clickOnServiceLink();
+	@Test(priority = 1)
+	public void createNewContactOption() throws InterruptedException {
+		contactpage = homepage.clickOnContactOption();
 	}
 
 	@AfterMethod
